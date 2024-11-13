@@ -1,5 +1,6 @@
 //Create a webpage with a 16x16 grid of square divs.
 const container = document.querySelector(".container");
+let color = "green";
 
 function createGrid(gWidth, gHeight){
     for(let i=0; i<gWidth; i++){
@@ -28,16 +29,16 @@ function createCell(column){
     cell.setAttribute("id", "cell");
 
     cell.addEventListener("mousedown", (e)=>{
-        e.target.style.backgroundColor = "green"; 
+        e.target.style.backgroundColor = color; 
     })
 
     cell.addEventListener("mouseover", (e)=> {
-        if(e.target.style.backgroundColor === "green"){}
+        if(e.target.style.backgroundColor === color){}
         else
             e.target.style.backgroundColor = "purple";
     })
     cell.addEventListener("mouseout", (e) => {
-        if(e.target.style.backgroundColor === "green"){}
+        if(e.target.style.backgroundColor === color){}
         else
             e.target.style.backgroundColor = "skyblue";
     })
@@ -56,6 +57,7 @@ function deleteGrid(){
     container.textContent=''; //removing all the children
 }
 
+// handling user input grid dimensions
 btn.addEventListener("click", ()=>{
     if(!errorMessage())
     {
@@ -74,9 +76,14 @@ function errorMessage(){
         alert(`Dimension too small. Choose other values.`)
         return true;
     }
-    return false;
+    return false; 
 }
 
 
+// randomization code
 
+document.body.addEventListener("keydown", (e)=>{ 
+    if(e.key===" ")
+        color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+})
 

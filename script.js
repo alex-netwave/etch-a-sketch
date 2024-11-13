@@ -31,12 +31,22 @@ function createCell(column){
     cell.addEventListener("mousedown", (e)=>{
         e.target.style.backgroundColor = "green"; 
     })
+
+    cell.addEventListener("mouseover", (e)=> {
+        if(e.target.style.backgroundColor === "green"){}
+        else
+            e.target.style.backgroundColor = "purple";
+    })
+    cell.addEventListener("mouseout", (e) => {
+        if(e.target.style.backgroundColor === "green"){}
+        else
+            e.target.style.backgroundColor = "red";
+    })
+
     column.appendChild(cell);
 }
 
 createGrid(16,16);
-
-const cellList = document.querySelectorAll("#cell");
 
 
 

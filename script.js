@@ -38,7 +38,7 @@ function createCell(column){
             e.target.style.backgroundColor = "purple";
     })
     cell.addEventListener("mouseout", (e) => {
-        if(e.target.style.backgroundColor === color){}
+        if(isValidColor(e.target.style.backgroundColor)){}
         else
             e.target.style.backgroundColor = "skyblue";
     })
@@ -83,7 +83,14 @@ function errorMessage(){
 // randomization code
 
 document.body.addEventListener("keydown", (e)=>{ 
-    if(e.key===" ")
+    if(e.key==="k")
         color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 })
 
+function isValidColor(strColor) {
+    var s = new Option().style;
+    s.color = strColor;
+  
+    // return 'false' if color wasn't assigned
+    return s.color == strColor.toLowerCase();
+}

@@ -1,6 +1,8 @@
 //Create a webpage with a 16x16 grid of square divs.
 const container = document.querySelector(".container");
-let color = "green";
+
+let color = "#008000";
+let delay = 10; //ms, should be dependent on the grid size, larger grid = smaller delay
 
 function createGrid(gWidth, gHeight){
     for(let i=0; i<gWidth; i++){
@@ -10,7 +12,7 @@ function createGrid(gWidth, gHeight){
 
 function createColumn(colHeight){
     const column = document.createElement("div");
-    column.style.backgroundColor = "green";
+    column.style.backgroundColor = "#008000";
     column.style.flex = "1 1 0";
     column.style.display = "flex";
     column.style.flexDirection = "column";
@@ -24,23 +26,29 @@ function createColumn(colHeight){
 
 function createCell(column){
     const cell = document.createElement("div");
-    cell.style.backgroundColor = "skyblue";
+    cell.style.backgroundColor = "#87ceeb";
     cell.style.flex = "1 1 0";
     cell.setAttribute("id", "cell");
+ 
 
     cell.addEventListener("mousedown", (e)=>{
         e.target.style.backgroundColor = color; 
     })
 
-    cell.addEventListener("mouseover", (e)=> {
-        if(e.target.style.backgroundColor === color){}
-        else
-            e.target.style.backgroundColor = "purple";
+    cell.addEventListener("mouseover", (e) => {
+        // let colorHolder = e.target.style.backgroundColor;      
+        // e.target.style.backgroundColor = "#800080";
     })
-    cell.addEventListener("mouseout", (e) => {
-        if(isValidColor(e.target.style.backgroundColor)){}
-        else
-            e.target.style.backgroundColor = "skyblue";
+
+    cell.addEventListener("mouseleave", (e) => {
+        let colorHolder = e.target.style.backgroundColor;
+
+        if(!(colorHolder === "#800080" || colorHolder ==="rgb(128, 0, 128)")){
+            e.target.style.backgroundColor = "#800080";
+            setTimeout(() => {
+                e.target.style.backgroundColor = colorHolder;
+            }, 50);
+        }
     })
 
     column.appendChild(cell);
@@ -49,9 +57,10 @@ function createCell(column){
 createGrid(16,16);
 
 
-const gHeight = document.querySelector(".height");
-const gWidth = document.querySelector(".width");
+const gHeight = document.querySelector("#height");
+const gWidth = document.querySelector("#width");
 const btn = document.querySelector("button");
+
 
 function deleteGrid(){
     container.textContent=''; //removing all the children
@@ -94,3 +103,4 @@ function isValidColor(strColor) {
     // return 'false' if color wasn't assigned
     return s.color == strColor.toLowerCase();
 }
+

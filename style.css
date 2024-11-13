@@ -55,3 +55,7 @@ button {
     margin: 5px 0px;
     width: 80px;
 }
+
+.highlight {
+    background-color: rgb(128, 0, 128);
+}

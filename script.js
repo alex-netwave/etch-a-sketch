@@ -26,11 +26,19 @@ function createCell(column){
     const cell = document.createElement("div");
     cell.style.backgroundColor = "red";
     cell.style.flex = "1 1 0";
+    cell.setAttribute("id", "cell");
 
+    cell.addEventListener("mousedown", (e)=>{
+        e.target.style.backgroundColor = "green"; 
+    })
     column.appendChild(cell);
 }
 
 createGrid(16,16);
+
+const cellList = document.querySelectorAll("#cell");
+
+
 
 
 

@@ -3,19 +3,34 @@ const container = document.querySelector(".container");
 const btn = document.querySelector("button");
 
 function createGrid(gWidth, gHeight){
-    numCells = gWidth * gHeight;
-    for(let i=0; i<numCells; i++){
-        createCell();
+    for(let i=0; i<gWidth; i++){
+        createColumn(gHeight);
     }
 }
 
-function createCell(){
+function createColumn(colHeight){
+    const column = document.createElement("div");
+    column.style.backgroundColor = "green";
+    column.style.flex = "1 1 0";
+    column.style.display = "flex";
+    column.style.flexDirection = "column";
+
+    for(let i=0; i<colHeight; i++){
+        createCell(column)
+    }
+
+    container.appendChild(column);
+}
+
+function createCell(column){
     const cell = document.createElement("div");
-    cell.style.backgroundColor = "green";
-    cell.style.width = "10px";
-    cell.style.height = "10px";
-    container.appendChild(cell);
+    cell.style.backgroundColor = "red";
+    cell.style.flex = "1 1 0";
+
+    column.appendChild(cell);
 }
 
 createGrid(16,16);
+
+
 

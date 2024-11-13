@@ -1,6 +1,5 @@
 //Create a webpage with a 16x16 grid of square divs.
 const container = document.querySelector(".container");
-const btn = document.querySelector("button");
 
 function createGrid(gWidth, gHeight){
     for(let i=0; i<gWidth; i++){
@@ -48,6 +47,35 @@ function createCell(column){
 
 createGrid(16,16);
 
+
+const gHeight = document.querySelector(".height");
+const gWidth = document.querySelector(".width");
+const btn = document.querySelector("button");
+
+function deleteGrid(){
+    container.textContent=''; //removing all the children
+}
+
+btn.addEventListener("click", ()=>{
+    if(!errorMessage())
+    {
+        deleteGrid();
+        createGrid(gHeight.value, gWidth.value);
+    }
+    
+})
+
+function errorMessage(){
+    if (gHeight.value > 100 || gWidth.value > 100){
+        alert("Value too high, may deter performance. Choose other values.");
+        return true;
+    }
+    else if(gHeight.value < 1 || gWidth.value < 1){
+        alert(`Dimension too small. Choose other values.`)
+        return true;
+    }
+    return false;
+}
 
 
 

@@ -23,7 +23,7 @@ function createColumn(colHeight){
 
 function createCell(column){
     const cell = document.createElement("div");
-    cell.style.backgroundColor = "red";
+    cell.style.backgroundColor = "skyblue";
     cell.style.flex = "1 1 0";
     cell.setAttribute("id", "cell");
 
@@ -39,7 +39,7 @@ function createCell(column){
     cell.addEventListener("mouseout", (e) => {
         if(e.target.style.backgroundColor === "green"){}
         else
-            e.target.style.backgroundColor = "red";
+            e.target.style.backgroundColor = "skyblue";
     })
 
     column.appendChild(cell);

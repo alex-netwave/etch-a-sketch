@@ -27,10 +27,7 @@ function createColumn(colHeight){
 let isSmoothDrawMode = false;
 
 function toggleSmoothDrawMode(){
-    if(isSmoothDrawMode)
-        isSmoothDrawMode = false;
-    else
-        isSmoothDrawMode = true;
+    isSmoothDrawMode = !isSmoothDrawMode;
 }
 
 function createCell(column){
@@ -81,6 +78,8 @@ createGrid(16,16);
 const gHeight = document.querySelector("#height");
 const gWidth = document.querySelector("#width");
 const resizeBtn = document.querySelector(".resize");
+const smoothModeBtn = document.querySelector(".smooth-mode");
+const randomModeBtn = document.querySelector(".randomize-mode");
 
 
 function deleteGrid(){
@@ -116,10 +115,32 @@ document.body.addEventListener("keydown", (e)=>{
         color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 })
 
+let isRandomColorMode = false;
+let RandomColorCycle = '';
+function toggleRandomColorMode(){
+    isRandomColorMode = !isRandomColorMode;
+    if(isRandomColorMode){
+        RandomColorCycle = setInterval(RandomColorMode, 1000);
+    }
+    else {
+        clearInterval(RandomColorCycle);
+    }
+}
+
+function RandomColorMode(){
+    color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+}
+
+
+
 // smooth drawing - click s key to toggle (no need to mouseclick, just move it)
 document.body.addEventListener("keydown", (e) =>{
     if(e.key==="s"){
         toggleSmoothDrawMode();
     }
 })
+
+smoothModeBtn.addEventListener("click", toggleSmoothDrawMode);
+randomModeBtn.addEventListener("click", toggleRandomColorMode);
+
 

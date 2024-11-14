@@ -51,7 +51,7 @@ input {
     flex-wrap: wrap;
 }
 
-button {
+.resize {
     margin: 5px 0px;
     width: 80px;
 }

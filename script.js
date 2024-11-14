@@ -1,5 +1,5 @@
 //Create a webpage with a 16x16 grid of square divs.
-const container = document.querySelector(".container");
+const gridContainer = document.querySelector(".grid-container");
 
 let color = "#008000";
 let delay = 10; //ms, should be dependent on the grid size, larger grid = smaller delay\
@@ -22,7 +22,7 @@ function createColumn(colHeight){
         createCell(column)
     }
 
-    container.appendChild(column);
+    gridContainer.appendChild(column);
 }
 
 function createCell(column){
@@ -66,7 +66,7 @@ const btn = document.querySelector("button");
 
 
 function deleteGrid(){
-    container.textContent=''; //removing all the children
+    gridContainer.textContent=''; //removing all the children
 }
 
 // handling user input grid dimensions

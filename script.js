@@ -3,7 +3,7 @@ const gridContainer = document.querySelector(".grid-container");
 
 let color = "#008000";
 let delay = 10; //ms, should be dependent on the grid size, larger grid = smaller delay\
-let i = 0;
+let idNum = 0;
 
 function createGrid(gWidth, gHeight){
     for(let i=0; i<gWidth; i++){
@@ -29,36 +29,39 @@ function createCell(column){
     const cell = document.createElement("div");
     cell.style.backgroundColor = "#87ceeb";
     cell.style.flex = "1 1 0";
-    cell.setAttribute("id", `cell${i}`);
-    i += 1;
+    cell.setAttribute("id", `cell${idNum}`);
+    idNum += 1;
 
-    cell.addEventListener("mousedown", (e)=>{
-        e.target.style.backgroundColor = color; 
-    })
+    // Store initial color
+    let originalColor = cell.style.backgroundColor; 
 
+    // Apply the color on mousedown (for permanent color change)
+    cell.addEventListener("mousedown", (e) => {
+        // update original color to current selected color
+        originalColor = color; 
+        e.target.style.backgroundColor = color;
+    });
+
+    // apply hover color on mouseover
     cell.addEventListener("mouseover", (e) => {
-        // let colorHolder = e.currentTarget.style.backgroundColor;      
-        // // e.target.style.backgroundColor = "#800080";
-        // e.target.style.backgroundColor = "#800080";
-    })
-
-    cell.addEventListener("mouseleave", (e) => {
-        //e.target.style.backgroundColor = colorHolder;
-        let colorHolder = e.target.style.backgroundColor;
-
-        if(!(colorHolder === "#800080" || colorHolder ==="rgb(128, 0, 128)")){
-            e.target.style.backgroundColor = "#800080";
-            setTimeout(() => {
-                e.target.style.backgroundColor = colorHolder;
-            }, 50);
+        if (e.buttons === 0) { // Only apply if no mouse button is pressed
+            e.target.style.backgroundColor = color; // Hover color
         }
-    })
+    });
+
+    // apply trail then revert it to original color on mouseleave
+    cell.addEventListener("mouseleave", (e) => {
+        e.target.style.backgroundColor = color;
+        setTimeout(() => {
+            e.target.style.backgroundColor = originalColor;
+        }, 50);
+    });
+    
 
     column.appendChild(cell);
 }
 
 createGrid(16,16);
-
 
 const gHeight = document.querySelector("#height");
 const gWidth = document.querySelector("#width");

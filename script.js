@@ -24,6 +24,14 @@ function createColumn(colHeight){
 
     gridContainer.appendChild(column);
 }
+let isSmoothDrawMode = false;
+
+function toggleSmoothDrawMode(){
+    if(isSmoothDrawMode)
+        isSmoothDrawMode = false;
+    else
+        isSmoothDrawMode = true;
+}
 
 function createCell(column){
     const cell = document.createElement("div");
@@ -51,10 +59,17 @@ function createCell(column){
 
     // apply trail then revert it to original color on mouseleave
     cell.addEventListener("mouseleave", (e) => {
-        e.target.style.backgroundColor = color;
-        setTimeout(() => {
-            e.target.style.backgroundColor = originalColor;
-        }, 50);
+        if(isSmoothDrawMode){
+            e.target.style.backgroundColor = color;
+            originalColor = color; 
+        }
+        else{
+            e.target.style.backgroundColor = color;
+            
+            setTimeout(() => {
+                e.target.style.backgroundColor = originalColor;
+            }, 50);            
+        }
     });
     
 
@@ -102,11 +117,10 @@ document.body.addEventListener("keydown", (e)=>{
         color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 })
 
-function isValidColor(strColor) {
-    var s = new Option().style;
-    s.color = strColor;
-  
-    // return 'false' if color wasn't assigned
-    return s.color == strColor.toLowerCase();
-}
+//
+document.body.addEventListener("keydown", (e) =>{
+    if(e.key==="s"){
+        toggleSmoothDrawMode();
+    }
+})
 

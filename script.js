@@ -80,7 +80,7 @@ createGrid(16,16);
 
 const gHeight = document.querySelector("#height");
 const gWidth = document.querySelector("#width");
-const btn = document.querySelector("button");
+const resizeBtn = document.querySelector(".resize");
 
 
 function deleteGrid(){
@@ -88,7 +88,7 @@ function deleteGrid(){
 }
 
 // handling user input grid dimensions
-btn.addEventListener("click", ()=>{
+resizeBtn.addEventListener("click", ()=>{
     if(!errorMessage())
     {
         deleteGrid();
@@ -110,14 +110,13 @@ function errorMessage(){
 }
 
 
-// randomization code
-
+// randomization of color - click k key to randomize
 document.body.addEventListener("keydown", (e)=>{ 
     if(e.key==="k")
         color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 })
 
-//
+// smooth drawing - click s key to toggle (no need to mouseclick, just move it)
 document.body.addEventListener("keydown", (e) =>{
     if(e.key==="s"){
         toggleSmoothDrawMode();

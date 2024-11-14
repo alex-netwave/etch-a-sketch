@@ -2,7 +2,8 @@
 const container = document.querySelector(".container");
 
 let color = "#008000";
-let delay = 10; //ms, should be dependent on the grid size, larger grid = smaller delay
+let delay = 10; //ms, should be dependent on the grid size, larger grid = smaller delay\
+let i = 0;
 
 function createGrid(gWidth, gHeight){
     for(let i=0; i<gWidth; i++){
@@ -28,19 +29,21 @@ function createCell(column){
     const cell = document.createElement("div");
     cell.style.backgroundColor = "#87ceeb";
     cell.style.flex = "1 1 0";
-    cell.setAttribute("id", "cell");
- 
+    cell.setAttribute("id", `cell${i}`);
+    i += 1;
 
     cell.addEventListener("mousedown", (e)=>{
         e.target.style.backgroundColor = color; 
     })
 
     cell.addEventListener("mouseover", (e) => {
-        // let colorHolder = e.target.style.backgroundColor;      
+        // let colorHolder = e.currentTarget.style.backgroundColor;      
+        // // e.target.style.backgroundColor = "#800080";
         // e.target.style.backgroundColor = "#800080";
     })
 
     cell.addEventListener("mouseleave", (e) => {
+        //e.target.style.backgroundColor = colorHolder;
         let colorHolder = e.target.style.backgroundColor;
 
         if(!(colorHolder === "#800080" || colorHolder ==="rgb(128, 0, 128)")){

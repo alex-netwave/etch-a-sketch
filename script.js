@@ -35,7 +35,7 @@ function createCell(column){
     // Store initial color
     let originalColor = cell.style.backgroundColor; 
 
-    // Apply the color on mousedown (for permanent color change)
+    // apply the selected color on mousedown
     cell.addEventListener("mousedown", (e) => {
         // update original color to current selected color
         originalColor = color; 
